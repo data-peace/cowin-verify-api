@@ -1,0 +1,8 @@
+{
+  "name": "covid-vaccine-verify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/data-peace/covid-vaccine-verify.git",
+  "author": "Manoj Bahuguna <manojbahugunamanoj@gmail.com>",
+  "license": "MIT"
+}
