@@ -1,5 +1,21 @@
 # Cowin Verify API
 
+## API
+
+1. Get vaccination data from certificate image
+
+```
+POST /verify-certificate
+
+request:
+file: Blob (multipart/form-data)
+
+response:
+{
+  data: CertificateData
+}
+```
+
 ## Setup
 
 run `yarn` command to install dependencies
