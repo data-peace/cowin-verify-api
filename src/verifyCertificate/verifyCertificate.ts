@@ -83,10 +83,14 @@ async function checkIfCertificateValid(certificateData: CertificateData) {
 
 async function checkIfCertificateRevoked(certificateData: CertificateData) {
   try {
-    const res = await fetch("/divoc/api/v1/certificate/revoked", {
-      method: "POST",
-      body: JSON.stringify(certificateData),
-    });
+    // TODO - move url to utils/constants
+    const res = await fetch(
+      "https://verify.cowin.gov.in/divoc/api/v1/certificate/revoked",
+      {
+        method: "POST",
+        body: JSON.stringify(certificateData),
+      }
+    );
 
     if (res.status === 200) return true;
 

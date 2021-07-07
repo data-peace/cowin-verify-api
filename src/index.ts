@@ -11,6 +11,7 @@ server.post("/verify-certificate", async (request) => {
   const imageFile = await request.file();
   const imageData = await getImageDataFromMultipartFile(imageFile);
   const vaccineData = await scanVaccineQr(imageData);
+  // TODO call verifyCertificate to check if cert valid
   return { data: vaccineData };
 });
 
