@@ -1,10 +1,10 @@
 import fastify from "fastify";
 import fastifyMultipart from "fastify-multipart";
-
 import { scanVaccineQr, verifyCertificate } from "./verifyCertificate";
 import { getImageDataFromMultipartFile } from "./utils";
+import { logger } from "./utils/logger";
 
-const server = fastify();
+const server = fastify({logger:logger});
 server.register(fastifyMultipart);
 
 server.post("/verify-certificate", async (request, reply) => {
@@ -14,8 +14,8 @@ server.post("/verify-certificate", async (request, reply) => {
 
   let verified = false;
   if (vaccineData)  verified = await verifyCertificate(vaccineData);
-  if (!verified) return reply.code(400).send({"error": "Invalid certificate"})
-  return {'data': vaccineData}
+  if (!verified) return reply.code(400).send({"error": "Invalid certificate"});
+  return {"data": vaccineData};
   
 });
 
