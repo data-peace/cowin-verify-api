@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import jsigs from "jsonld-signatures";
 import { RSAKeyPair } from "crypto-ld";
 import { documentLoaders } from "jsonld";

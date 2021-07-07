@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/eslint": "^7.2.13",
     "@types/node": "^16.0.0",
+    "@types/node-fetch": "^2.5.11",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
     "concurrently": "^6.2.0",
@@ -32,6 +33,7 @@
     "jsonld": "^2.0.2",
     "jsonld-signatures": "^6.0.0",
     "jszip": "^3.6.0",
+    "node-fetch": "^2.6.1",
     "security-context": "^4.0.0",
     "vaccination-context": "^1.0.8",
     "zbar.wasm": "^2.0.3"
