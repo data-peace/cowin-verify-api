@@ -7,6 +7,7 @@ import { vaccinationContext } from "vaccination-context";
 
 import config from "./config.json";
 import credentialsv1 from "./credentials.json";
+import { logger } from "../utils/logger";
 
 import type { CertificateData } from "./CertificateData";
 
@@ -104,10 +105,16 @@ async function checkIfCertificateRevoked(certificateData: CertificateData) {
 
 export async function verifyCertificate(certificateData: CertificateData) {
   const isValid = await checkIfCertificateValid(certificateData);
-  if (!isValid) return false;
+  if (!isValid){
+    logger.info("invalid certificate");
+    return false;
+  } 
 
   const isRevoked = await checkIfCertificateRevoked(certificateData);
-  if (isRevoked) return false;
+  if (isRevoked) {
+    logger.info("certificate revoked");
+    return false;
+  }
 
   return true;
 }
