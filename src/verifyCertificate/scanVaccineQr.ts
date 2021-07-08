@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import { scanImageData } from "zbar.wasm";
+import { logger } from "../utils/logger";
 
 import type { CertificateData } from "./CertificateData";
 
@@ -16,7 +17,7 @@ async function getVaccineCertificateContent(data: string) {
     );
     return JSON.parse(certificateContent) as CertificateData;
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     return null;
   }
 }

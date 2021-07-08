@@ -8,6 +8,7 @@ import { vaccinationContext } from "vaccination-context";
 import config from "./config.json";
 import credentialsv1 from "./credentials.json";
 import { logger } from "../utils/logger";
+import {CertificateValidationError} from "../utils/error";
 
 import type { CertificateData } from "./CertificateData";
 
@@ -42,7 +43,7 @@ const customLoader = (url: string) => {
     return JSON.parse(url);
   }
 
-  console.error("Fallback url lookup for document :" + url);
+  logger.error("Fallback url lookup for document :" + url);
   return documentLoader()(url);
 };
 
@@ -78,7 +79,7 @@ async function checkIfCertificateValid(certificateData: CertificateData) {
 
     return true;
   } catch (e) {
-    console.error("Invalid data", e);
+    logger.error(e);
     return false;
   }
 }
@@ -93,13 +94,11 @@ async function checkIfCertificateRevoked(certificateData: CertificateData) {
         body: JSON.stringify(certificateData),
       }
     );
-
     if (res.status === 200) return true;
-
     return false;
   } catch (err) {
-    console.error(err);
-    throw new Error("Failed to validate certificate!");
+    logger.error(err);
+    throw new CertificateValidationError("Failed to validate certificate!");
   }
 }
 
