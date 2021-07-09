@@ -2,7 +2,7 @@ import fastify from "fastify";
 import fastifyMultipart from "fastify-multipart";
 
 import { scanVaccineQr, verifyCertificate } from "./verifyCertificate";
-import { getImageDataFromMultipartFile } from "./utils";
+import { getImageDataFromMultipartFile, getInfoFromCertificateData } from "./utils";
 import { logger } from "./utils/logger";
 import { CertificateValidationError } from "./utils/error";
 
@@ -19,7 +19,7 @@ server.post("/verify-certificate", async (request, reply) => {
     const verified = await verifyCertificate(vaccineData);
     if (!verified) throw new CertificateValidationError("Failed to verify certificate")
     
-    return {"data": vaccineData};
+    return {"shortInfo": getInfoFromCertificateData(vaccineData), "certificateData": vaccineData};
 
   } catch (err) {
     logger.error(err);
