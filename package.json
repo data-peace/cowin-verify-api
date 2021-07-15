@@ -1,9 +1,9 @@
 {
-  "name": "covid-vaccine-verify",
-  "version": "1.0.0",
+  "name": "cowin-verify-api",
+  "version": "0.1.0",
   "main": "dist/index.js",
-  "repository": "https://github.com/data-peace/covid-vaccine-verify.git",
-  "author": "Manoj Bahuguna <manojbahugunamanoj@gmail.com>",
+  "repository": "https://github.com/data-peace/cowin-verify-api.git",
+  "author": "Dev Team <dev@datapeace.in>",
   "license": "MIT",
   "scripts": {
     "build-ts": "tsc",

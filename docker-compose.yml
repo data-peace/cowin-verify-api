@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   app:
-    image: cowin-verify-api:1.0.0
+    image: cowin-verify-api:0.1.0
     build:
       context: .
       dockerfile: Dockerfile
