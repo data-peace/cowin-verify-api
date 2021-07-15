@@ -9,5 +9,5 @@ export function getInfoFromCertificateData(certificateData: CertificateData){
         "nationality": certificateData.credentialSubject.nationality,
         "vaccineDosesGiven": certificateData.evidence.length,
         "vaccineTotalDosesNeeded": certificateData.evidence[0].totalDoses,
-    }
+    };
 }

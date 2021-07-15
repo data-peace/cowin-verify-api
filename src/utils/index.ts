@@ -1,2 +1,2 @@
 export * from "./imageData";
-export { getInfoFromCertificateData } from './extractData'
+export { getInfoFromCertificateData } from "./extractData";

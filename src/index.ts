@@ -15,16 +15,16 @@ server.post("/verify-certificate", async (request, reply) => {
     const imageData = await getImageDataFromMultipartFile(imageFile);
     const vaccineData = await scanVaccineQr(imageData);
 
-    if (!vaccineData) throw new CertificateValidationError("Failed to scan certificate qr")
+    if (!vaccineData) throw new CertificateValidationError("Failed to scan certificate qr");
     const verified = await verifyCertificate(vaccineData);
-    if (!verified) throw new CertificateValidationError("Failed to verify certificate")
+    if (!verified) throw new CertificateValidationError("Failed to verify certificate");
     
     return {"shortInfo": getInfoFromCertificateData(vaccineData), "certificateData": vaccineData};
 
   } catch (err) {
     logger.error(err);
-    if (err instanceof CertificateValidationError) return reply.code(400).send({'error': err.message});
-    else return reply.code(500).send({'error': err});
+    if (err instanceof CertificateValidationError) return reply.code(400).send({"error": err.message});
+    else return reply.code(500).send({"error": err});
   }
   
 });
