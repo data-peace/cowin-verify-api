@@ -1,9 +1,15 @@
-Cowin Verify API
-===================
+COWIN Certificate Verify API
+=============================
+A NodeJS based project to host web api for verifying and get details of COWIN certificate.
+
+
+## Requirements
+1. NodeJS (14+ recommended)
+2. `yarn` package manager
 
 ## API Endpoints
 
-1. Get certificate data from certificate image
+1. Get certificate data by uploading certificate image(jpeg/png)
 
 Request
 ```
