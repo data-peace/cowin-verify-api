@@ -31,8 +31,17 @@ server.post("/verify-certificate", async (request, reply) => {
   
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function closeGracefully(signal: any) {
+  logger.info("Closing server gracefully");
+  await server.close();
+  process.exit();
+}
+process.on("SIGINT", closeGracefully);
+
+
 // TODO - move PORT to utils/constants
-server.listen(process.env.PORT || 8080, (err, address) => {
+server.listen(process.env.PORT || 8080, process.env.HOST || "127.0.0.1" ,(err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);

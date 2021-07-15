@@ -1,2 +1,10 @@
-node_modules
-dist
+# ignore everything
+*
+
+# whitelist what needed in context
+!src/
+!package.json
+!yarn.lock
+!index.d.ts
+!tsconfig.json
+!.eslintrc
