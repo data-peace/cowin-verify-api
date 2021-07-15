@@ -10,11 +10,14 @@
     "build": "npm run build-ts && npm run lint",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "start": "node dist/index.js",
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "dev:debug": "nodemon --config nodemon.json --inspect src/index.ts",
     "watch-node": "nodemon --inspect dist/index.js",
     "watch-ts": "tsc -w",
     "watch": "concurrently \"npm run watch-ts\" \"npm run watch-node\" "
   },
   "devDependencies": {
+    "@tsconfig/node14": "^1.0.1",
     "@types/eslint": "^7.2.13",
     "@types/node": "^16.0.0",
     "@types/node-fetch": "^2.5.11",
@@ -24,6 +27,7 @@
     "concurrently": "^6.2.0",
     "eslint": "^7.30.0",
     "nodemon": "^2.0.9",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {

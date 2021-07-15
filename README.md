@@ -38,7 +38,8 @@ Content-Type: application/json
 ## Setup project
 
 1. Run `yarn` command to install dependencies
-1. Run `yarn watch` command to start server and listen to changes
+1. Run `yarn dev` command to start app for development purpose
+1. Run `yarn dev:debug` command to start in debug mode for development purpose
 1. run `yarn build` to build the project. Build project located in `dist` folder.
 1. run `yarn start` to start server
 
