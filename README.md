@@ -1,51 +1,53 @@
-# Cowin Verify API
+Cowin Verify API
+===================
 
-## API
+## API Endpoints
 
-1. Get vaccination data from certificate image
+1. Get certificate data from certificate image
 
+Request
 ```
 POST /verify-certificate
+Content-Type: multipart/form-data
 
-request:
-file: Blob (multipart/form-data)
+file: <Image-Binary-data>
+```
 
-response:
+
+Response
+```
+200 OK
+Content-Type: application/json
+
 {
-  data: CertificateData
+  "data": {
+    "shortInfo": {
+      "userRefId": "",
+      "name": "",
+      "gender": "",
+      "age": "",
+      "nationality": "",
+      "vaccineDosesGiven": "",
+      "vaccineTotalDosesNeeded": "",
+    },
+    "certificateData": {}
+  }
 }
 ```
 
-## Setup
+## Setup project
 
-run `yarn` command to install dependencies
-
----
-
-### Development
-
-run `yarn watch` command to start server and listen to changes
-
----
-
-### Start server
-
-1. run `yarn build` to build
+1. Run `yarn` command to install dependencies
+1. Run `yarn watch` command to start server and listen to changes
+1. run `yarn build` to build the project. Build project located in `dist` folder.
 1. run `yarn start` to start server
 
----
+## Deploy app using PM2
+First build the app then run the app
 
-### Deploy app using PM2
-
-First build the app by running command. 
-run `npm run build` to build app to `dist` folder
-
-run `pm2 start ecosystem.config.js` to start app
-
-run `pm2 stop ecosystem.config.js` to stop 
-
-run `pm2 restart ecosystem.config.js` to restart
-
-run `pm2 reload ecosystem.config.js` to reload
-
-run `pm2 delete ecosystem.config.js` to delete
+1. Run `npm run build` to build app to `dist` folder
+1. Run `pm2 start pm2-ecosystem.config.js` to start app
+1. Run `pm2 stop pm2-ecosystem.config.js` to stop 
+1. Run `pm2 restart pm2-ecosystem.config.js` to restart
+1. Run `pm2 reload pm2-ecosystem.config.js` to reload
+1. Run `pm2 delete pm2-ecosystem.config.js` to delete
