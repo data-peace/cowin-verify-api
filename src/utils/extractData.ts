@@ -7,7 +7,7 @@ export function getInfoFromCertificateData(certificateData: CertificateData){
         "gender": certificateData.credentialSubject.gender,
         "age": certificateData.credentialSubject.age,
         "nationality": certificateData.credentialSubject.nationality,
-        "vaccineDosesGiven": certificateData.evidence.length,
+        "vaccineDosesGiven": certificateData.evidence[0].dose,
         "vaccineTotalDosesNeeded": certificateData.evidence[0].totalDoses,
     };
 }
