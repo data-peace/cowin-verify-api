@@ -2,7 +2,7 @@ import fastify from "fastify";
 import fastifyMultipart from "fastify-multipart";
 
 import { scanVaccineQr, verifyCertificate } from "./verifyCertificate";
-import { getImageDataFromMultipartFile, getInfoFromCertificateData } from "./utils";
+import { getInfoFromCertificateData, getImageData } from "./utils";
 import { logger } from "./utils/logger";
 import { CertificateValidationError } from "./utils/error";
 
@@ -12,8 +12,8 @@ server.register(fastifyMultipart);
 server.post("/verify-certificate", async (request, reply) => {
   try{
     const imageFile = await request.file();
-    const imageData = await getImageDataFromMultipartFile(imageFile);
-
+    const imageData = await getImageData(imageFile);
+    
     const vaccineData = await scanVaccineQr(imageData);
     if (!vaccineData) throw new CertificateValidationError("Failed to scan certificate qr");
 

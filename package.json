@@ -39,6 +39,7 @@
     "jsonld-signatures": "^6.0.0",
     "jszip": "^3.6.0",
     "node-fetch": "^2.6.1",
+    "pdf2pic": "^2.0.0",
     "pino": "^6.12.0",
     "security-context": "^4.0.0",
     "vaccination-context": "^1.0.8",
