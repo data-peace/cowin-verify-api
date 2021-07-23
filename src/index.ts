@@ -7,7 +7,11 @@ import { logger } from "./utils/logger";
 import { CertificateValidationError } from "./utils/error";
 
 const server = fastify({logger:logger});
-server.register(fastifyMultipart);
+server.register(fastifyMultipart,  {
+    limits: {
+      fileSize: parseInt(process.env.MAX_UPLOAD_FILE_SIZE || "") || 1024*1024, // 1024KB or 1MB
+    }
+  });
 
 server.post("/verify-certificate", async (request, reply) => {
   try{
@@ -26,7 +30,7 @@ server.post("/verify-certificate", async (request, reply) => {
     logger.error(err);
     if (err instanceof CertificateValidationError) return reply.code(400).send({"error": err.message});
 
-    return reply.code(500).send({"error": "Something went wrong. Please try again later."});
+    return err;
   }
   
 });
