@@ -1,12 +1,19 @@
 import fastify from "fastify";
 import fastifyMultipart from "fastify-multipart";
-
+import fastifyCors from "fastify-cors";
 import { scanVaccineQr, verifyCertificate } from "./verifyCertificate";
 import { getInfoFromCertificateData, getImageData } from "./utils";
 import { logger } from "./utils/logger";
 import { CertificateValidationError } from "./utils/error";
 
+
 const server = fastify({logger:logger});
+
+server.register(fastifyCors, {
+  origin: "*",
+  maxAge: 60*60*1, // 1 hour
+});
+
 server.register(fastifyMultipart,  {
     limits: {
       fileSize: parseInt(process.env.MAX_UPLOAD_FILE_SIZE || "") || 1024*1024, // 1024KB or 1MB
