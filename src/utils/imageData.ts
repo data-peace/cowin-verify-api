@@ -38,6 +38,6 @@ async function convertPDFtoImage(file: MultipartFile) {
 
   const convert = fromBuffer(await file.toBuffer(), baseOptions);
   const pageOutput = await convert(1, true);
-  const pngBuffer = Buffer.from(Object(pageOutput).base64, 'base64');
+  const pngBuffer = Buffer.from(Object(pageOutput).base64, "base64");
   return pngBuffer;
 }
