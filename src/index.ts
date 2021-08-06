@@ -29,7 +29,7 @@ server.post("/verify-certificate", async (request, reply) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = request.body;
     if (!data) {
-      reply.code(400).send({ "error": "No form data found, either set 'file' or 'qr_data' form field" });
+      return reply.code(400).send({ "error": "No form data found, either set 'file' or 'qr_data' form field." });
     }
 
     let vaccineData = null;
@@ -44,7 +44,7 @@ server.post("/verify-certificate", async (request, reply) => {
     }
 
     if (!vaccineData) {
-      throw new CertificateValidationError("Form data is invalid");
+      return reply.code(400).send({ "error": "Form data is invalid, not found expected form fields." });
     }
 
     const verified = await verifyCertificate(vaccineData);
