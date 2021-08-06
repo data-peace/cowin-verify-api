@@ -16,7 +16,7 @@ async function getImageDataFromBuffer(buffer: Buffer) {
   return imageData;
 }
 
-export async function getImageData(file: MultipartFile) {
+export async function getImageData(file: MultipartFile | any) {
   const type = file.mimetype.split("/");
   if (type[0] === "image") return await getImageDataFromMultipartFile(file);
   else return await getImageDataFromPDF(file);
@@ -40,4 +40,8 @@ async function convertPDFtoImage(file: MultipartFile) {
   const pageOutput = await convert(1, true);
   const pngBuffer = Buffer.from(Object(pageOutput).base64, "base64");
   return pngBuffer;
+}
+
+export async function convertFromBase64(base64: string){
+  return Buffer.from(base64, "base64").toString('binary');
 }
