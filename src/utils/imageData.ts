@@ -2,10 +2,6 @@ import type { MultipartFile } from "fastify-multipart";
 import { Canvas, loadImage } from "canvas";
 import { fromBuffer } from "pdf2pic";
 
-export async function getImageDataFromMultipartFile(imageFile: MultipartFile) {
-  const imageData = await getImageDataFromBuffer(await imageFile.toBuffer());
-  return imageData;
-}
 
 async function getImageDataFromBuffer(buffer: Buffer) {
   const image = await loadImage(buffer);
@@ -16,32 +12,37 @@ async function getImageDataFromBuffer(buffer: Buffer) {
   return imageData;
 }
 
-export async function getImageData(file: MultipartFile | any) {
+export async function getMultipartFileData(file: MultipartFile) {
   const type = file.mimetype.split("/");
-  if (type[0] === "image") return await getImageDataFromMultipartFile(file);
-  else return await getImageDataFromPDF(file);
+  if (type[0] === "image") return await getImageDataFromImageFile(file);
+  else return await getImageDataFromPDFFile(file);
 }
 
-async function getImageDataFromPDF(file: MultipartFile) {
-  const ImageBuffer = await convertPDFtoImage(file);
+export async function getImageDataFromImageFile(imageFile: MultipartFile) {
+  const imageData = await getImageDataFromBuffer(await imageFile.toBuffer());
+  return imageData;
+}
+
+async function getImageDataFromPDFFile(pdfFile: MultipartFile) {
+  const ImageBuffer = await convertPDFtoImage(pdfFile);
   const imageData = await getImageDataFromBuffer(ImageBuffer);
   return imageData;
 }
 
-    
-async function convertPDFtoImage(file: MultipartFile) {
+
+async function convertPDFtoImage(pdfFile: MultipartFile) {
   const baseOptions = {
     width: 1024,
     height: 1024,
     density: 300
   };
 
-  const convert = fromBuffer(await file.toBuffer(), baseOptions);
+  const convert = fromBuffer(await pdfFile.toBuffer(), baseOptions);
   const pageOutput = await convert(1, true);
   const pngBuffer = Buffer.from(Object(pageOutput).base64, "base64");
   return pngBuffer;
 }
 
-export async function convertFromBase64(base64: string){
-  return Buffer.from(base64, "base64").toString('binary');
+export async function getDataFromBase64(base64: string) {
+  return Buffer.from(base64, "base64").toString("binary");
 }
