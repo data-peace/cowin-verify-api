@@ -22,6 +22,12 @@ async function getVaccineCertificateContent(data: string) {
   }
 }
 
+export async function getEncryptedCertificateData(data: string){
+  const certificateData = await getVaccineCertificateContent(data);
+  if (certificateData) return certificateData;
+  return null;
+}
+
 export async function scanVaccineQr(qrImage: ImageData) {
   const symbols = await scanImageData(qrImage);
   for (let i = 0; i < symbols.length; ++i) {
